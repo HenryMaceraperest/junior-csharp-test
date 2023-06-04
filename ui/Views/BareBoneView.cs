@@ -131,7 +131,11 @@ namespace ui
             try
             {
                 orderViewModel.LoadSearchData(searchStartDate, searchEndDate, orderId);
-                bareBoneOrdersGridView.DataSource = orderViewModel.OrdersForSearchDisplay;
+                bareBoneOrdersGridView.DataSource = orderViewModel.OrdersForDisplay;
+                if (orderViewModel.TotalOrders == 0)
+                {
+                    tooltip.Show("No results found! Please try a different number, or different dates.", textBoxBBSearch, 0, -30, 4000);
+                }    
                 UpdateRowCountLabel();
                 UpdatePageNumberLabel();
             }

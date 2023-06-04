@@ -123,14 +123,22 @@ namespace ui.Views
             {
                 complexViewModel.LoadSearchOrderNumbers(orderFromDate, orderToDate, orderId); 
                 listBoxOrderId.Items.Clear();
+                Font newFont = new Font(listBoxOrderId.Font.FontFamily, 12, FontStyle.Regular);
+                Font usualFont = new Font(listBoxOrderId.Font.FontFamily, 28, FontStyle.Regular);
                 int[] numbers = complexViewModel.OrderNumbers;
-                if (numbers != null)
+                if (numbers.Length != 0)
                 {
+                    listBoxOrderId.Enabled = true;
+                    listBoxOrderId.Font = usualFont;
                     listBoxOrderId.Items.AddRange(numbers.Select(n => n.ToString()).ToArray());
                 }
                 else
                 { 
-                    listBoxOrderId.Items.Clear(); 
+                    listBoxOrderId.Items.Clear();
+                    listBoxOrderId.Font = newFont;
+                    string msg = "No results found!";
+                    listBoxOrderId.Items.Add(msg);
+                    listBoxOrderId.Enabled = false;
                 }
                 if (listBoxOrderId.SelectedIndex == -1)
                 {

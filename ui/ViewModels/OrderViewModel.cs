@@ -15,6 +15,7 @@ namespace ui.ViewModels
         public OrderViewModel()
         {
             dbContext = new DatabaseContext();
+            LoadData();
         }
         private List<OrderModel> cachedOrders;
         private readonly DatabaseContext dbContext;
@@ -25,10 +26,6 @@ namespace ui.ViewModels
         {
             get 
             {
-                if (ordersForDisplay == null || !ordersForDisplay.Any())
-                {
-                    LoadData();
-                }
                 return ordersForDisplay;
             }            
             set
@@ -36,11 +33,6 @@ namespace ui.ViewModels
                 ordersForDisplay = value;
             }
         }
-        public ObservableCollection<OrderModel> OrdersForSearchDisplay
-        {
-            get { return ordersForDisplay; }
-        }
-
         private int currentPage;
         public int CurrentPage
         {
